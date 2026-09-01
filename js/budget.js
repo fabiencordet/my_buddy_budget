@@ -178,25 +178,17 @@ function renderBudgetPrevisionnel(activeMonth) {
         if (t.exclu_dashboard) return;
         const m = t.mois_affectation || getYearMonthString(t.date);
         if (m !== activeMonth) return;
+
         const amt = parseFloat(t.montant) || 0;
         if (!Number.isFinite(amt) || amt === 0) return;
 
         const p = (t.poste || '').toUpperCase().trim();
         const d = (t.description || '').toUpperCase().trim();
         const k = p + '||' + d;
-        const label = `${p} ${d}`.toUpperCase();
-        const isReimbursement = /(REMBOURSEMENT|REFUND|REIMBURSEMENT)/.test(label);
-        const absAmt = Math.abs(amt);
+        const netAmt = -amt;
 
-        if (amt > 0) {
-            if (!isReimbursement) return;
-            spentByDesc[k]  = (spentByDesc[k]  || 0) - absAmt;
-            spentByPoste[p] = (spentByPoste[p] || 0) - absAmt;
-            return;
-        }
-
-        spentByDesc[k]  = (spentByDesc[k]  || 0) + absAmt;
-        spentByPoste[p] = (spentByPoste[p] || 0) + absAmt;
+        spentByDesc[k]  = (spentByDesc[k]  || 0) + netAmt;
+        spentByPoste[p] = (spentByPoste[p] || 0) + netAmt;
     });
 
     let totalBudget = 0, totalActual = 0;

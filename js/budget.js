@@ -179,12 +179,13 @@ function renderBudgetPrevisionnel(activeMonth) {
         const m = t.mois_affectation || getYearMonthString(t.date);
         if (m !== activeMonth) return;
         const amt = parseFloat(t.montant) || 0;
-        if (amt >= 0) return;
+        if (!Number.isFinite(amt) || amt === 0) return;
         const p = (t.poste || '').toUpperCase().trim();
         const d = (t.description || '').toUpperCase().trim();
         const k = p + '||' + d;
-        spentByDesc[k]  = (spentByDesc[k]  || 0) + Math.abs(amt);
-        spentByPoste[p] = (spentByPoste[p] || 0) + Math.abs(amt);
+        const absAmt = Math.abs(amt);
+        spentByDesc[k]  = (spentByDesc[k]  || 0) + absAmt;
+        spentByPoste[p] = (spentByPoste[p] || 0) + absAmt;
     });
 
     let totalBudget = 0, totalActual = 0;

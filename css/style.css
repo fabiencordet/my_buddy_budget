@@ -77,7 +77,7 @@ body::before {
 
 .stats-chart-wrap {
     position: relative;
-    height: 320px;
+    height: 300px;
     width: 100%;
 }
 
@@ -263,11 +263,31 @@ body::before {
     }
 
     .stats-chart-wrap {
-        height: 270px;
+        height: 235px;
     }
 
-    .stats-total-bar { padding: 7px 8px; }
+    #dashboard-subtab-statistiques .card {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    #dashboard-subtab-statistiques .stats-toggle-group {
+        padding: 2px;
+    }
+
+    #dashboard-subtab-statistiques #stats-breadcrumbs {
+        gap: 4px;
+    }
+
+    #dashboard-subtab-statistiques .crumb-btn {
+        padding: 2px 7px;
+    }
+
+    .stats-total-bar { padding: 6px 8px; }
     .stats-total-value { font-size: 11px; }
+    .stats-name-list { gap: 4px; }
+    .stats-name-item { padding: 3px 7px; }
+    .stats-slice-info { padding: 6px 8px; gap: 6px; }
     .stats-slice-percent { padding-left: 6px; }
 
     .stats-toggle { padding: 5px 8px; }
